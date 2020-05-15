@@ -4,7 +4,7 @@ node ('UBANTU') {
         
     }
       stage ('build-pro') {
-          sh label: '', script: 'mvn clean test package'
+          sh label: '', script: 'mvn clean test '
         
     }
       stage ('after-build') {
@@ -12,6 +12,11 @@ node ('UBANTU') {
           archiveArtifacts 'gameoflife-web/target/*.jar,gameoflife-web/target/*.war'
           junit 'gameoflife-web/target/surefire-reports/*.xml'
           
+       }
+      stage ('Final Check') {
+          echo "this project for mavan clean and test"
+        
+    }    
           
         
     }
