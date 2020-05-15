@@ -1,0 +1,18 @@
+node ('UBANTU') {
+    stage ('scm-git repo') {
+        git branch: 'gameoflife-release-1.0.37', credentialsId: '4b575546-6b9a-4c7e-8643-401ace9f2588', url: 'https://github.com/bpankaj03/game-of-life.git'
+        
+    }
+      stage ('build-pro') {
+          sh label: '', script: 'mvn clean test package'
+        
+    }
+      stage ('after-build') {
+          
+          archiveArtifacts 'gameoflife-web/target/*.jar,gameoflife-web/target/*.war'
+          junit 'gameoflife-web/target/surefire-reports/*.xml'
+          
+          
+        
+    }
+}
